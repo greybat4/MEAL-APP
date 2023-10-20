@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>MEAL APP</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        
+        <!-- main container div for the site -->
+        <div class="main-container">
+            <!-- navbar container starting i am using bootstrap for styles-->
+                <nav class="navbar bg-body-tertiary">
+                    <div class="container-fluid">
+                      <h1>Meal Recipe Finder</h1>
+                      <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search Meal" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        
+                      </form>
+                      <button type="button" class="btn btn-danger">Favorite</button>
+                    
+                      
+                    </div>
+                    <!-- end of navbar container -->
+                  </nav>
+
+                <!-- main section -->
+                <main>
+                    <section>
+                        <!-- recipe container starts -->
+                        <div class="recipe-container">
+
+                            <!-- end of recipe container -->
+                        </div>
+
+                        <!-- recipe ingrediants section -->
+                        <div class="recipe-details">
+                            <button type="button" class="ingrediants-close-btn">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                            <div class="ingrediants-section">
+
+                            </div>
+ 
+
+                            <!-- end of recipe ingrediants section -->
+                        </div>
+                    </section>
+                    <!-- end of main section -->
+                </main>
+
+        <!-- end of main container -->
+        </div>
+
+
+        
+        <script src="https://kit.fontawesome.com/9289145011.js" crossorigin="anonymous"></script>
+        <script src="script.js" async defer></script>
+    </body>
+</html>
