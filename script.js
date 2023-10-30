@@ -14,6 +14,7 @@ if (!localStorage.getItem("favMeals")) {
 } else {
   favMeals = JSON.parse(localStorage.getItem("favMeals"));
 }
+console.log(localStorage.getItem("favMeals"));
 
 // function to get recipe after click event and it runs async
 const fetchRecipes = async (query) => {
@@ -71,19 +72,20 @@ const fetchRecipes = async (query) => {
 
 // adding meal to the Favorite section when this function is being called
 const addtoFavoriteSection = (meal) => {
-    // Check if favMeals already includes a meal with the same idMeal
+  // Check if favMeals already includes a meal with the same idMeal
+  console.log("favMeals", favMeals);
+  console.log("meal", meal);
   const isMealInFavorites = favMeals.some(favMeal => favMeal.idMeal === meal.idMeal);
-    if (meal && !isMealInFavorites) {
-      favMeals.push(meal);
-      console.log("Adding meal to favorites:", meal);
-      alert(`${meal.strMeal} added to your favorites.`);
-    } else if (meal) {
-      alert(`${meal.strMeal} is Already in Favorites-List`);
-    }
-  };
-  
-  
-   
+  if (meal && !isMealInFavorites) {
+    favMeals.push(meal);
+    localStorage.setItem("favMeals", JSON.stringify(favMeals));
+    console.log("Adding meal to favorites:", meal);
+    alert(`${meal.strMeal} added to your favorites.`);
+  } else if (meal) {
+    alert(`${meal.strMeal} is Already in Favorites-List`);
+  }
+};
+
 // handling the click event of the favoriteBox button onClick
 favoriteBox.addEventListener("click", () => {
   displayFavMeals();
@@ -175,23 +177,23 @@ async function displayFavMeals() {
           <p><span>${mealData.strArea}</span> Cuisine </p>
           <p>Belongs To  <span>${mealData.strCategory}</span>  Category </p>
         `;
-        
-        const readMoreButton = document.createElement("button");
-        const removeButton = document.createElement("button");
-        removeButton.innerHTML = '<i class="fas fa-trash"></i> Remove from Favorites';
-        readMoreButton.textContent = "View Recipe";
-        favoriteSectionDiv.appendChild(readMoreButton)
-        recipeContainer.append(favoriteSectionDiv);
-        favoriteSectionDiv.appendChild(removeButton);
 
-         readMoreButton.addEventListener("click", () => {
+          const readMoreButton = document.createElement("button");
+          const removeButton = document.createElement("button");
+          removeButton.innerHTML =
+            '<i class="fas fa-trash"></i> Remove from Favorites';
+          readMoreButton.textContent = "View Recipe";
+          favoriteSectionDiv.appendChild(readMoreButton);
+          recipeContainer.append(favoriteSectionDiv);
+          favoriteSectionDiv.appendChild(removeButton);
+
+          readMoreButton.addEventListener("click", () => {
             openRecipePopup(mealData);
           });
 
-          removeButton.addEventListener("click", () =>{
-            console.log(meal);
+          removeButton.addEventListener("click", () => {
+            console.log(mealData);
             removeFavorite(meal);
-        
           });
           readMoreButton.addEventListener("click", () => {
             openRecipePopup(meal);
@@ -199,29 +201,27 @@ async function displayFavMeals() {
           recipeCloseButton.addEventListener("click", () => {
             ingrediantSection.parentElement.style.display = "none";
           });
-        
-          
         } else {
           console.log(`Invalid data for meal: ${JSON.stringify(mealData)}`);
         }
       } else {
         console.log(`No meals found for: ${meal.strMeal}`);
+        break;
       }
     }
   }
- 
-  
 }
 // recipeContainer.appendChild(removeFavorite);
 console.log(favMeals);
 // function for remove meal from favorite section
-function removeFavorite(meal){
-    if(meal !== null){
-        const mealIndex = favMeals.findIndex(fav => fav.idMeal === meal.idMeal);
-        if(mealIndex !== -1){
-            favMeals.splice(mealIndex, 1);
-            displayFavMeals();
-            alert(`${meal.strMeal} has been removed from favorites`)
-        }
+function removeFavorite(meal) {
+  if (meal !== null) {
+    const mealIndex = favMeals.findIndex((fav) => fav.idMeal === meal.idMeal);
+    if (mealIndex !== -1) {
+      favMeals.splice(mealIndex, 1);
+      localStorage.setItem("favMeals", JSON.stringify(favMeals));
+      displayFavMeals();
+      alert(`${meal.strMeal} has been removed from favorites`);
     }
+  }
 }
