@@ -3,6 +3,7 @@ const searchBox = document.querySelector(".me-2");
 const searchButton = document.querySelector(".btn-outline-success");
 const favoriteBox = document.querySelector(".btn-danger");
 const recipeContainer = document.querySelector(".recipe-container");
+const bodyContainer = document.querySelector(".main");
 const recipeDetails = document.querySelector(".recipe-details");
 const ingrediantSection = document.querySelector(".ingrediants-section");
 const recipeCloseButton = document.querySelector(".ingrediants-close-btn");
@@ -75,7 +76,9 @@ const addtoFavoriteSection = (meal) => {
   // Check if favMeals already includes a meal with the same idMeal
   console.log("favMeals", favMeals);
   console.log("meal", meal);
-  const isMealInFavorites = favMeals.some(favMeal => favMeal.idMeal === meal.idMeal);
+  const isMealInFavorites = favMeals.some(
+    (favMeal) => favMeal.idMeal === meal.idMeal
+  );
   if (meal && !isMealInFavorites) {
     favMeals.push(meal);
     localStorage.setItem("favMeals", JSON.stringify(favMeals));
@@ -156,8 +159,7 @@ searchButton.addEventListener("click", (e) => {
 });
 
 async function displayFavMeals() {
-  recipeContainer.innerHTML = "";
-
+  recipeContainer.innerHTML = `<img src="https://img.freepik.com/free-vector/restaurant-mural-wallpaper_23-2148706001.jpg?w=996&t=st=1698835247~exp=1698835847~hmac=82673d905e8a6eb7b46605079d4b17740ed2af5e4aaef00de8a3553c91f08a64" alt="fav-background"`;
   for (let meal of favMeals) {
     if (meal) {
       const response = await fetch(
